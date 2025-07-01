@@ -216,3 +216,8 @@ MIT License - see LICENSE file for details
 - OuteTTS engine support
 - Chatterbox TTS integration
 - OpenAI API compatibility
+
+## License
+This project is licensed under the GNU Affero General Public License v3.0 (AGPL-3.0).
+
+### Commercial use<br>Companies that wish to use AutoTTS without AGPL obligations can purchase a commercial license. Contact → **github@wlacu.com**
