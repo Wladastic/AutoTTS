@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  autotts:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - HOST=0.0.0.0
+      - PORT=8000
+      - LOG_LEVEL=info
+      - ENABLE_CACHE=true
+      - AUTO_DETECT_LANGUAGE=true
+    volumes:
+      - ./cache:/app/cache
+      - ./models:/app/models  # Mount for custom model files
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    
+  # Optional: Redis for distributed caching
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  redis_data:
